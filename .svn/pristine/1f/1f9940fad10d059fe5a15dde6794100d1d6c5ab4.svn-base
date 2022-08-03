@@ -1,0 +1,23 @@
+<?php
+$tags_en = App\Models\Product::groupBy('product_tags_en')->select('product_tags_en')->get();
+$tags_hin = App\Models\Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
+ ?>
+ <div class="sidebar-widget product-tag wow fadeInUp">
+   <h3 class="section-title">Product tags</h3>
+   <div class="sidebar-widget-body outer-top-xs">
+     <div class="tag-list"> 
+       <?php if(session()->get('language') == 'hindi'): ?>
+       <?php $__currentLoopData = $tags_hin; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+       <a class="item active" title="Phone" href="<?php echo e(url('product/tag/'.$tag->product_tags_hin)); ?>"><?php echo e(str_replace(',',' ',$tag->product_tags_hin)); ?></a> 
+       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php else: ?>  
+        <?php $__currentLoopData = $tags_en; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+       <a class="item active" title="Phone" href="<?php echo e(url('product/tag/'.$tag->product_tags_en)); ?>"><?php echo e(str_replace(',',' ',$tag->product_tags_en)); ?></a> 
+       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+       <?php endif; ?>
+         </div>
+     <!-- /.tag-list --> 
+   </div>
+   <!-- /.sidebar-widget-body --> 
+ </div>
+ <!-- /.sidebar-widget --> <?php /**PATH C:\xampp\htdocs\Laravel-Shopping\resources\views/frontend/common/product_tags.blade.php ENDPATH**/ ?>
